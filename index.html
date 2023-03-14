@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript Form validation</title>
+
+    <style>
+        body{
+            padding: 10px 50px;
+        }
+        .formdesign{
+            font-size: 20px;
+        }
+        .formdesign input{
+            width: 50%;
+            padding: 12px 20px;
+            border: 1px solid blue;
+            margin: 14px;
+            border-radius: 4px;
+            font-size: 15px;
+        }
+        .formerror{
+            color: red;
+        }
+        .but{
+            border-radius: 9px;
+            width: 100px;
+            height: 50px;
+            font-size: 25px;
+            margin: 22px 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the best form on Internet!</h1>
+    <form onsubmit="return validation()">
+<div class="formdesign">
+Name:<input type="text" id="name" name="fname"><span id="nameerror"><b></b></b></span>
+</div>
+
+<div class="formdesign">
+    Email:<input type="email" id="email" name="femail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"><span id="emailerror"><b></b></b></span>
+    </div>
+
+    <div class="formdesign">
+        Phone:<input type="phone" id="phone" name="fphone" pattern="[1-9]{1}[0-9]{9}" ><span id="phoneerror"><b></b></b></span>
+        </div>
+
+        <div class="formdesign">
+            Password:<input type="password" id="password" name="fpassword"><span id="passworderror"><b></b></b></span>
+            </div>
+
+            <div class="formdesign">
+                Confirm Password:<input type="password" id="cpass" name="fcpassword"><span id="cpasserror"><b></b></b></span>
+                </div>
+                <input class="but" type="submit" name="submit" value="submit">
+    </form>
+</body>
+<script>
+    function validation(){
+
+    name=document.getElementById("name").value;
+    if(name==""){
+        document.getElementById("nameerror").innerHTML="** Please enter name";
+        document.getElementById("nameerror").style.color="red";
+        return false;
+    }
+    if(name.length<=2 || name.length>20){
+        document.getElementById("nameerror").innerHTML="** Name must be between 2 to 20";
+        document.getElementById("nameerror").style.color="red";
+        return false;
+    }
+    email=document.getElementById("email").pattern;
+    document.getElementById("emailerror").innerHTML=email;
+     
+    cphone=document.getElementById("phone").pattern;
+    document.getElementById("phoneerror").innerHTML=cphone;
+
+    cpassword=document.getElementById("password").value;
+    if(cpassword==""){
+        document.getElementById("passworderror").innerHTML="** Please enter password";
+        document.getElementById("passworderror").style.color="red";
+        return false;
+    }
+    if(cpassword.length<8){
+        document.getElementById("passworderror").innerHTML="** Please enter 8 digit password";
+        document.getElementById("passworderror").style.color="red";
+        return false;  
+    }
+    if(cpassword.search(/[A-Z]/)==-1){
+        document.getElementById("passworderror").innerHTML="** Please enter min one upper case";
+        document.getElementById("passworderror").style.color="red";
+        return false;    
+    }
+    if(cpassword.search(/[a-z]/)==-1){
+        document.getElementById("passworderror").innerHTML="** Please enter min one lower case";
+        document.getElementById("passworderror").style.color="red";
+        return false;    
+    }
+    if(cpassword.search(/[0-9]/)==-1){
+        document.getElementById("passworderror").innerHTML="** Please enter min one numeric value";
+        document.getElementById("passworderror").style.color="red";
+        return false; 
+    }
+    if(cpassword.search(/[@#$&]/)==-1){
+        document.getElementById("passworderror").innerHTML="** Please enter min one special char[@#$&]";
+        document.getElementById("passworderror").style.color="red";
+        return false;  
+    }
+    Confirmpassword=document.getElementById("cpass").value;
+    if(cpassword!=Confirmpassword){
+        document.getElementById("cpasserror").innerHTML="** Password does not matched";
+        return false;
+    }
+}
+</script>
+</html>
